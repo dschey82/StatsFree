@@ -22,6 +22,8 @@
 		BA207F9E26620297006B25B9 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA207F9D26620297006B25B9 /* Game.swift */; };
 		BA207FA3266202D0006B25B9 /* StatEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA207FA2266202D0006B25B9 /* StatEvent.swift */; };
 		BA207FAC266205DD006B25B9 /* ShotsModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA207FAB266205DD006B25B9 /* ShotsModalView.swift */; };
+		BA207FB72662898A006B25B9 /* GameModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA207FB62662898A006B25B9 /* GameModalView.swift */; };
+		BA207FBC26629917006B25B9 /* StatsCollectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA207FBB26629917006B25B9 /* StatsCollectorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		BA207F9D26620297006B25B9 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		BA207FA2266202D0006B25B9 /* StatEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatEvent.swift; sourceTree = "<group>"; };
 		BA207FAB266205DD006B25B9 /* ShotsModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotsModalView.swift; sourceTree = "<group>"; };
+		BA207FB62662898A006B25B9 /* GameModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModalView.swift; sourceTree = "<group>"; };
+		BA207FBB26629917006B25B9 /* StatsCollectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCollectorView.swift; sourceTree = "<group>"; };
 		DD470AB9F79D650886AD78F2 /* Pods-StatsFree.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatsFree.debug.xcconfig"; path = "Target Support Files/Pods-StatsFree/Pods-StatsFree.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				BA207FAA266205C5006B25B9 /* Modals */,
+				BA207FBB26629917006B25B9 /* StatsCollectorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 			children = (
 				BA207F772661F4DC006B25B9 /* StatsModalView.swift */,
 				BA207FAB266205DD006B25B9 /* ShotsModalView.swift */,
+				BA207FB62662898A006B25B9 /* GameModalView.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -383,6 +389,8 @@
 				BA03CCEE265CD8AB00424637 /* StatsFreeApp.swift in Sources */,
 				BA207FA3266202D0006B25B9 /* StatEvent.swift in Sources */,
 				BA207F8C266200E9006B25B9 /* Player.swift in Sources */,
+				BA207FBC26629917006B25B9 /* StatsCollectorView.swift in Sources */,
+				BA207FB72662898A006B25B9 /* GameModalView.swift in Sources */,
 				BA207F782661F4DC006B25B9 /* StatsModalView.swift in Sources */,
 				BA207F9E26620297006B25B9 /* Game.swift in Sources */,
 			);
