@@ -7,37 +7,44 @@ struct ContentView: View {
     @State private var showGameModal = false;
     @State private var showTeamModal = false;
     @State private var activeGame: Game?
-    @State private var teams: [Team] = []
+    @State private var teams: [Team] = [Team]()
     @State private var test: String = ""
     private var games: [Game] = []
     private let fileManager: FileManager = .default
     
     var body: some View {
-        VStack {
-            Spacer()
-            Button("Add Team") {
-                showTeamModal = true
-            }.sheet(isPresented: $showTeamModal) {
-                AddTeamModal(addTeamCallback: addTeam)
-            }.frame(height:200)
-            Text("\(test)")
-            if (activeGame == nil) {
+        if (activeGame == nil) {
+            VStack {
+                Spacer()
+                Button("Manage Teams") {
+                   showTeamModal = true
+                }.sheet(isPresented: $showTeamModal) {
+                    ManageTeamsView(teams: self.teams, callback: addTeams)
+                }.frame(height:200)
+                Text("\(test)")
                 Button("Open New Game") {
                     showGameModal = true
-                }.sheet(isPresented: $showGameModal, onDismiss: {}) {
-                    GameModalView(callback: setActiveGame)
+                }.sheet(isPresented: $showGameModal) {
+                    GameModalView(teams: teams, callback: setActiveGame)
                 }
-            } else {
-                StatsCollectorView(game: activeGame!)
-            }
+            }.onAppear(perform: getTeams)
             Spacer()
-        }.onAppear(perform: getTeams)
+        } else {
+            StatsCollectorView(game: activeGame!)
+        }
     }
     
-    
+    func addTeams(_ teams: [Team]){
+        for team in teams {
+            guard let existing = self.teams.firstIndex(of: team) else {
+                self.teams.append(team)
+                continue
+            }
+            self.teams[existing] = team
+        }
+    }
     
     func addTeam(team: Team) {
-        print("adding \(team.name)")
         teams.append(team)
         saveTeams()
     }

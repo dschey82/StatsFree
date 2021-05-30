@@ -26,6 +26,7 @@
 		BA207FBC26629917006B25B9 /* StatsCollectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA207FBB26629917006B25B9 /* StatsCollectorView.swift */; };
 		BA207FC12662D2B1006B25B9 /* AddTeamModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA207FC02662D2B1006B25B9 /* AddTeamModal.swift */; };
 		BA207FC62662D6AB006B25B9 /* AddPlayerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA207FC52662D6AB006B25B9 /* AddPlayerModal.swift */; };
+		BA59C91C266414C300B503D5 /* ManageTeamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA59C91B266414C300B503D5 /* ManageTeamsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		BA207FBB26629917006B25B9 /* StatsCollectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCollectorView.swift; sourceTree = "<group>"; };
 		BA207FC02662D2B1006B25B9 /* AddTeamModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTeamModal.swift; sourceTree = "<group>"; };
 		BA207FC52662D6AB006B25B9 /* AddPlayerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerModal.swift; sourceTree = "<group>"; };
+		BA59C91B266414C300B503D5 /* ManageTeamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageTeamsView.swift; sourceTree = "<group>"; };
 		DD470AB9F79D650886AD78F2 /* Pods-StatsFree.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatsFree.debug.xcconfig"; path = "Target Support Files/Pods-StatsFree/Pods-StatsFree.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -210,6 +212,7 @@
 				BA207FB62662898A006B25B9 /* GameModalView.swift */,
 				BA207FC02662D2B1006B25B9 /* AddTeamModal.swift */,
 				BA207FC52662D6AB006B25B9 /* AddPlayerModal.swift */,
+				BA59C91B266414C300B503D5 /* ManageTeamsView.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				BA03CCEE265CD8AB00424637 /* StatsFreeApp.swift in Sources */,
 				BA207FA3266202D0006B25B9 /* StatEvent.swift in Sources */,
 				BA207F8C266200E9006B25B9 /* Player.swift in Sources */,
+				BA59C91C266414C300B503D5 /* ManageTeamsView.swift in Sources */,
 				BA207FBC26629917006B25B9 /* StatsCollectorView.swift in Sources */,
 				BA207FB72662898A006B25B9 /* GameModalView.swift in Sources */,
 				BA207F782661F4DC006B25B9 /* StatsModalView.swift in Sources */,

@@ -5,11 +5,21 @@ struct AddTeamModal: View {
     @State private var name = ""
     @State private var roster: [Player] = []
     @State private var showAddPlayer = false
-    let addTeamCallback: (Team) -> Void
+    let callback: (Team) -> Void
+    
+    init(team: Team, callback: @escaping (Team) -> Void) {
+        self.callback = callback
+        _name = State(initialValue: team.name)
+        _roster = State(initialValue: team.roster.player_list)
+    }
+    
+    init(callback: @escaping (Team) -> Void) {
+        self.callback = callback
+    }
     
     var body: some View {
         VStack {
-            TextField("Team Name" , text: $name)
+            TextField("Team Name" , text: self.$name)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 .border(Color(UIColor.separator))
@@ -31,7 +41,7 @@ struct AddTeamModal: View {
                 Spacer()
                 Button("Submit") {
                     // TODO: validate data
-                    addTeamCallback(Team(name: self.name, roster: Roster(player_list: roster)))
+                    callback(Team(name: self.name, roster: Roster(player_list: roster)))
                     self.presentation.wrappedValue.dismiss()
                 }
             }.padding()
