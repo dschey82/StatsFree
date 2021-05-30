@@ -24,6 +24,8 @@
 		BA207FAC266205DD006B25B9 /* ShotsModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA207FAB266205DD006B25B9 /* ShotsModalView.swift */; };
 		BA207FB72662898A006B25B9 /* GameModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA207FB62662898A006B25B9 /* GameModalView.swift */; };
 		BA207FBC26629917006B25B9 /* StatsCollectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA207FBB26629917006B25B9 /* StatsCollectorView.swift */; };
+		BA207FC12662D2B1006B25B9 /* AddTeamModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA207FC02662D2B1006B25B9 /* AddTeamModal.swift */; };
+		BA207FC62662D6AB006B25B9 /* AddPlayerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA207FC52662D6AB006B25B9 /* AddPlayerModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		BA207FAB266205DD006B25B9 /* ShotsModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotsModalView.swift; sourceTree = "<group>"; };
 		BA207FB62662898A006B25B9 /* GameModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModalView.swift; sourceTree = "<group>"; };
 		BA207FBB26629917006B25B9 /* StatsCollectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCollectorView.swift; sourceTree = "<group>"; };
+		BA207FC02662D2B1006B25B9 /* AddTeamModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTeamModal.swift; sourceTree = "<group>"; };
+		BA207FC52662D6AB006B25B9 /* AddPlayerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerModal.swift; sourceTree = "<group>"; };
 		DD470AB9F79D650886AD78F2 /* Pods-StatsFree.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatsFree.debug.xcconfig"; path = "Target Support Files/Pods-StatsFree/Pods-StatsFree.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -204,6 +208,8 @@
 				BA207F772661F4DC006B25B9 /* StatsModalView.swift */,
 				BA207FAB266205DD006B25B9 /* ShotsModalView.swift */,
 				BA207FB62662898A006B25B9 /* GameModalView.swift */,
+				BA207FC02662D2B1006B25B9 /* AddTeamModal.swift */,
+				BA207FC52662D6AB006B25B9 /* AddPlayerModal.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -381,9 +387,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA207FC12662D2B1006B25B9 /* AddTeamModal.swift in Sources */,
 				BA0326F7265E0DB200991387 /* YTWrapper.swift in Sources */,
 				BA207FAC266205DD006B25B9 /* ShotsModalView.swift in Sources */,
 				BA03CCF0265CD8AB00424637 /* ContentView.swift in Sources */,
+				BA207FC62662D6AB006B25B9 /* AddPlayerModal.swift in Sources */,
 				BA207F992662026A006B25B9 /* Team.swift in Sources */,
 				BA207F9426620224006B25B9 /* Roster.swift in Sources */,
 				BA03CCEE265CD8AB00424637 /* StatsFreeApp.swift in Sources */,

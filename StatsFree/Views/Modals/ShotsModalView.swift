@@ -4,8 +4,9 @@ struct ShotsModalView: View {
     @Environment(\.presentationMode) var presentation
     @State private var selectedPlayerIndex = 0
     @State private var shotResult = StatEventType.shotMissed
-    let players = [Player(given_name: "Dan", family_name: "Schey", jersey_number: 77), Player(given_name: "Tim", family_name: "Armstrong", jersey_number: 17), Player(given_name: "Andrew", family_name: "Jahan", jersey_number: 99)]
-    //let game: Game
+    let players: [Player] = []
+    let callback: (StatEvent) -> Void
+    
     
     var body: some View {
         VStack {
@@ -23,8 +24,7 @@ struct ShotsModalView: View {
             }.pickerStyle(DefaultPickerStyle())
             Button("Submit") {
                 let evt = StatEvent(actor: players[selectedPlayerIndex], event: shotResult, target: nil)
-                print(evt.toString())
-                
+                callback(evt)
                 self.presentation.wrappedValue.dismiss()
             }
         }

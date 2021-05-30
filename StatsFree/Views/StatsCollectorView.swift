@@ -3,40 +3,27 @@ import SwiftUI
 let TEST_URL: String = "vXK0CL3vFZU"
 
 struct StatsCollectorView: View {
+    let game: Game
+    // TODO: figure out why this needs to be marked @State to work
+    @State private var statEvents = [StatEvent]()
+    
     @State private var youtubeUrl: String = TEST_URL
     @State private var userEnteredValue: String = ""
     @State private var YTWindow = YTWrapper()
     @State private var showModal = false
-    @State private var game: Game?
     @State private var showGameModal = false
-
+    
+    init(game: Game) {
+        self.game = game
+    }
     var body: some View {
         VStack {
-            HStack {
-                if (game == nil){
-                    Button("Enter Game Info") {
-                        showGameModal = true
-                        YTWindow.pause()
-                    }.sheet(isPresented: $showGameModal, onDismiss: {YTWindow.play()}) {
-                        GameModalView(callback: setActiveGame)
-                    }
-                }
-            }
-            HStack {
-                Text("YouTube URL: ")
-                TextField("" , text: $userEnteredValue)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .border(Color(UIColor.separator))
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                Button(action: update) { Text("Open") }.background(Color.gray).foregroundColor(.white)
-            }.padding()
             HStack {
                 Button("Shot Taken") {
                     self.showModal = true
                     YTWindow.pause()
                 }.padding().sheet(isPresented: $showModal, onDismiss: {YTWindow.play()}) {
-                    ShotsModalView()
+                    ShotsModalView(callback: addStat)
                 }
                 Button(action: play) { Text("Play")}.background(Color.gray).foregroundColor(.white)
             }
@@ -66,15 +53,16 @@ struct StatsCollectorView: View {
         return true;
     }
     
-    func setActiveGame(home: Team, away: Team, date: Date) {
-        game = Game(home: home, away: away)
+    func addStat(event: StatEvent) {
+        print(event)
+        statEvents.append(event)
     }
 }
 
 struct StatsCollectorView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            StatsCollectorView()
+            StatsCollectorView(game: Game(videoId: TEST_URL, home: Team(name:"Traitors", roster:Roster(player_list: [])), away: Team(name:"Marauders", roster: Roster(player_list: []))))
         }
     }
 }
