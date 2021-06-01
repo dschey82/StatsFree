@@ -5,15 +5,18 @@ struct AddTeamModal: View {
     @State private var name = ""
     @State private var roster: [Player] = []
     @State private var showAddPlayer = false
+    private var id: UUID
     let callback: (Team) -> Void
     
     init(team: Team, callback: @escaping (Team) -> Void) {
         self.callback = callback
+        id = team.id
         _name = State(initialValue: team.name)
         _roster = State(initialValue: team.roster.player_list)
     }
     
     init(callback: @escaping (Team) -> Void) {
+        id = UUID()
         self.callback = callback
     }
     
@@ -27,7 +30,7 @@ struct AddTeamModal: View {
             // roster
             List(roster) { player in
                 Text("\(player.jersey_number) \(player.given_name) \(player.family_name)")
-            }
+            }.id(UUID())
             // add player
             Button("Add Player") {
                 showAddPlayer = true
@@ -41,7 +44,7 @@ struct AddTeamModal: View {
                 Spacer()
                 Button("Submit") {
                     // TODO: validate data
-                    callback(Team(name: self.name, roster: Roster(player_list: roster)))
+                    callback(Team(id: self.id, name: self.name, roster: Roster(player_list: roster)))
                     self.presentation.wrappedValue.dismiss()
                 }
             }.padding()

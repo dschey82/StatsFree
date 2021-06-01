@@ -4,14 +4,10 @@ let TEST_URL: String = "vXK0CL3vFZU"
 
 struct StatsCollectorView: View {
     let game: Game
-    // TODO: figure out why this needs to be marked @State to work
     @State private var statEvents = [StatEvent]()
-    
-    @State private var youtubeUrl: String = TEST_URL
-    @State private var userEnteredValue: String = ""
     @State private var YTWindow = YTWrapper()
-    @State private var showModal = false
-    @State private var showGameModal = false
+    @State private var showHomeShotsModal = false
+    @State private var showAwayShotsModal = false
     
     init(game: Game) {
         self.game = game
@@ -19,11 +15,22 @@ struct StatsCollectorView: View {
     var body: some View {
         VStack {
             HStack {
+                Text("Home")
                 Button("Shot Taken") {
-                    self.showModal = true
+                    self.showHomeShotsModal = true
                     YTWindow.pause()
-                }.padding().sheet(isPresented: $showModal, onDismiss: {YTWindow.play()}) {
-                    ShotsModalView(callback: addStat)
+                }.padding().sheet(isPresented: $showHomeShotsModal, onDismiss: {YTWindow.play()}) {
+                    ShotsModalView(game: game, homeTeam: true, timestamp: YTWindow.getTime(), callback: addStat)
+                }
+                Button(action: play) { Text("Play")}.background(Color.gray).foregroundColor(.white)
+            }
+            HStack {
+                Text("Away")
+                Button("Shot Taken") {
+                    self.showAwayShotsModal = true
+                    YTWindow.pause()
+                }.padding().sheet(isPresented: $showAwayShotsModal, onDismiss: {YTWindow.play()}) {
+                    ShotsModalView(game: self.game, homeTeam: false, timestamp: YTWindow.getTime(), callback: addStat)
                 }
                 Button(action: play) { Text("Play")}.background(Color.gray).foregroundColor(.white)
             }
@@ -32,13 +39,11 @@ struct StatsCollectorView: View {
     }
     
     func loadDefaults() {
-        YTWindow.loadVideo(videoId: TEST_URL)
+        YTWindow.loadVideo(videoId: game.videoId)
     }
     
     func update() {
-        if (validate(val: userEnteredValue)) {
-            YTWindow.loadVideo(videoId: userEnteredValue)
-        }
+        
     }
     
     func pause() {

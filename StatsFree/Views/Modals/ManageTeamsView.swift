@@ -27,6 +27,8 @@ struct ManageTeamsView: View {
                 }.pickerStyle(WheelPickerStyle()).frame(width:300)
                 Button("Edit Team") {
                     showEditTeamModal = true
+                    print(teams)
+                    print(selectedTeamIndex)
                 }.sheet(isPresented: $showEditTeamModal) {
                     AddTeamModal(team: teams[selectedTeamIndex], callback: edit)
                 }

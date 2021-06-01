@@ -24,4 +24,12 @@ public struct YTWrapper : UIViewRepresentable {
     public func play() {
         playerView.playVideo()
     }
+    
+    public func getTime() -> Float {
+        var currentTime: Float = 0.0
+        playerView.currentTime({ (result,err) in
+            currentTime = result
+        })
+        return currentTime
+    }
 }

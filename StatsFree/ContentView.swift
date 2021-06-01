@@ -7,7 +7,6 @@ struct ContentView: View {
     @State private var showGameModal = false;
     @State private var showTeamModal = false;
     @State private var activeGame: Game?
-    @State private var teams: [Team] = [Team]()
     @State private var test: String = ""
     private var games: [Game] = []
     private let fileManager: FileManager = .default
@@ -19,15 +18,15 @@ struct ContentView: View {
                 Button("Manage Teams") {
                    showTeamModal = true
                 }.sheet(isPresented: $showTeamModal) {
-                    ManageTeamsView(teams: self.teams, callback: addTeams)
+                    ManageTeamsView(teams: getTeams(), callback: addTeams)
                 }.frame(height:200)
                 Text("\(test)")
                 Button("Open New Game") {
                     showGameModal = true
                 }.sheet(isPresented: $showGameModal) {
-                    GameModalView(teams: teams, callback: setActiveGame)
+                    GameModalView(teams: getTeams(), callback: setActiveGame)
                 }
-            }.onAppear(perform: getTeams)
+            }
             Spacer()
         } else {
             StatsCollectorView(game: activeGame!)
@@ -35,24 +34,29 @@ struct ContentView: View {
     }
     
     func addTeams(_ teams: [Team]){
-        for team in teams {
-            guard let existing = self.teams.firstIndex(of: team) else {
-                self.teams.append(team)
-                continue
+        var existing = getTeams()
+        for index in 0..<teams.count {
+            var exists = false
+            for eindex in 0..<existing.count {
+                if teams[index].id == existing[eindex].id {
+                    exists = true
+                    existing[index] = teams[index]
+                }
             }
-            self.teams[existing] = team
+            if !exists {
+                existing.append(teams[index])
+            }
         }
+        saveTeams(teams: existing)
     }
     
-    func addTeam(team: Team) {
-        teams.append(team)
-        saveTeams()
-    }
-    
-    func saveTeams() {
+    func saveTeams(teams: [Team]) {
         let docUrl = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let path = docUrl.appendingPathComponent(TEAMS_FILE)
-        let toWrite = "Valorant"
+        
+        guard let toWrite = encode(teams) else {
+            return
+        }
         do {
             try toWrite.write(to: path, atomically: true, encoding: .utf8)
         }catch {
@@ -60,19 +64,29 @@ struct ContentView: View {
         }
     }
     
-    func getTeams()-> Void {
+    func encode(_ teams: [Team]) -> String? {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        do {
+            let data = try encoder.encode(teams)
+            return String(data: data, encoding: .utf8)
+        } catch {
+            return nil
+        }
+    }
+    
+    func getTeams()-> [Team] {
         let docUrl = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let path = docUrl.appendingPathComponent(TEAMS_FILE)
         do {
-            let todos = try String(contentsOf: path)
-
-            for todo in todos.split(separator: ";") {
-                print(todo)
-            }
-            
-            test = todos;
+            let stringer = try String(contentsOf: path)
+            let json = stringer.data(using: .utf8)!
+            let decoder = JSONDecoder()
+            let data = try decoder.decode([Team].self, from: json)
+            return data
         } catch {
             print(error.localizedDescription)
+            return [Team]()
         }
     }
     

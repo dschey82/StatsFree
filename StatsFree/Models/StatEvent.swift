@@ -1,11 +1,12 @@
 struct StatEvent {
+    let timestamp: Float
     let actor: Player
     let event: StatEventType
     let target: Player?
     
     func toString() -> String {
         let evtString = getStringFor(eventType: event)
-        return "\(actor.given_name) \(actor.family_name) \(evtString)";
+        return "\(timestamp)sec: \(actor.given_name) \(actor.family_name) \(evtString)";
     }
     
     func getStringFor(eventType: StatEventType) -> String {

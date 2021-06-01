@@ -32,8 +32,7 @@ struct AddPlayerModal: View {
                 Spacer()
                 Button("Add") {
                     // TODO: validate data
-                    let jersey = Int(jersey_number)
-                    callback(Player(given_name: given_name, family_name: family_name, jersey_number: jersey ?? -1))
+                    callback(Player(given_name: given_name, family_name: family_name, jersey_number: jersey_number))
                     self.presentation.wrappedValue.dismiss()
                 }
             }.padding()
