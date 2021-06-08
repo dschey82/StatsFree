@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ManageTeamsView: View {
     @Environment(\.presentationMode) var presentation
-    @State private var selectedTeamIndex = 0
+    @State private var selectedTeamIndex: Int
     @State private var teams = [Team]()
     @State private var showAddTeamModal = false
     @State private var showEditTeamModal = false
@@ -10,10 +10,12 @@ struct ManageTeamsView: View {
     
     init(callback: @escaping ([Team]) -> Void) {
         self.callback = callback
+        _selectedTeamIndex = State(initialValue: 0)
     }
     init(teams: [Team], callback: @escaping ([Team]) -> Void) {
         _teams = State(initialValue: teams)
         self.callback = callback
+        _selectedTeamIndex = State(initialValue: 0)
     }
     
     var body: some View {
@@ -22,7 +24,7 @@ struct ManageTeamsView: View {
             HStack {
                 Picker("Team Picker", selection: $selectedTeamIndex) {
                     ForEach(0..<teams.count, id: \.self, content: { index in
-                        Text(teams[index].name).tag(index)
+                        Text(teams[index].name)
                     })
                 }.pickerStyle(WheelPickerStyle()).frame(width:300)
                 Button("Edit Team") {

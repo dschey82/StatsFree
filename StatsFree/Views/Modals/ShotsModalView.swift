@@ -5,20 +5,20 @@ struct ShotsModalView: View {
     @State private var selectedPlayerIndex = 0
     @State private var shotResult = StatEventType.shotMissed
     @State private var shotTargetIndex = 0
-    let game: Game
-    let homeTeam: Bool
-    let callback: (StatEvent) -> Void
+    private let _vm: ShotsModalVM
+    let statsCollector: StatsCollectorVM
+    let team: TeamLoc
     let sourcePlayers: [Player]
     let targetPlayers: [Player]
-    let timestamp: Float
     
-    init(game: Game, homeTeam: Bool, timestamp: Float, callback: @escaping (StatEvent) -> Void) {
-        self.game = game
-        self.homeTeam = homeTeam
-        self.timestamp = timestamp
-        self.callback = callback
-        sourcePlayers = homeTeam ? game.home.roster.player_list : game.away.roster.player_list
-        targetPlayers = homeTeam ? game.away.roster.player_list : game.home.roster.player_list
+    init(statsVM: StatsCollectorVM, team: TeamLoc, ytWindow: YTWrapper) {
+        self._vm = ShotsModalVM(ytWindow: ytWindow)
+        self.statsCollector = statsVM
+        self.team = team
+        let home = statsCollector.homeTeam
+        let away = statsCollector.awayTeam
+        sourcePlayers = team == .home ? home.roster.player_list : away.roster.player_list
+        targetPlayers = team == .home ? away.roster.player_list : home.roster.player_list
     }
     
     var body: some View {
@@ -43,13 +43,19 @@ struct ShotsModalView: View {
                     }
                 }
             }
-            
-            Button("Submit") {
-                let target = shotResult == StatEventType.shotBlocked ? targetPlayers[shotTargetIndex] : nil
-                let evt = StatEvent(timestamp: self.timestamp, actor: self.sourcePlayers[selectedPlayerIndex], event: self.shotResult, target: target)
-                callback(evt)
-                self.presentation.wrappedValue.dismiss()
+            HStack {
+                Button("Cancel") {
+                    self.presentation.wrappedValue.dismiss()
+                }
+                Button("Submit") {
+                    let target = shotResult == StatEventType.shotBlocked ? targetPlayers[shotTargetIndex] : nil
+                    let evt = StatEvent(timestamp: self._vm.timestamp, actor: self.sourcePlayers[selectedPlayerIndex], eventType: self.shotResult, target: target)
+                    print(evt)
+                    statsCollector.addEvent(event: evt)
+                    self.presentation.wrappedValue.dismiss()
+                }
             }
+            
         }
     }
 }

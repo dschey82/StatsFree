@@ -25,11 +25,9 @@ public struct YTWrapper : UIViewRepresentable {
         playerView.playVideo()
     }
     
-    public func getTime() -> Float {
-        var currentTime: Float = 0.0
-        playerView.currentTime({ (result,err) in
-            currentTime = result
-        })
-        return currentTime
+    public func getTime(handler: @escaping (Float, Error?)-> Void) {
+        playerView.currentTime{ (result, err) in
+            handler(result, err)
+        }
     }
 }

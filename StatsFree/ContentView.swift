@@ -15,11 +15,12 @@ struct ContentView: View {
         if (activeGame == nil) {
             VStack {
                 Spacer()
-                Button("Manage Teams") {
-                   showTeamModal = true
-                }.sheet(isPresented: $showTeamModal) {
-                    ManageTeamsView(teams: getTeams(), callback: addTeams)
-                }.frame(height:200)
+                NavigationView {
+                    NavigationLink(destination: ManageTeamsView(teams: getTeams(), callback: addTeams)) {
+                        Text("Manage Teams")
+                    }
+                }
+                
                 Text("\(test)")
                 Button("Open New Game") {
                     showGameModal = true

@@ -3,4 +3,10 @@ struct Game {
     let home: Team
     let away: Team
     private let statEvents: [StatEvent] = []
+    
+    subscript(team: TeamLoc) -> Team {
+        get {
+            return team == TeamLoc.home ? home : away
+        }
+    }
 }
