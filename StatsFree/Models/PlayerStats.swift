@@ -16,6 +16,4 @@ struct PlayerStats {
         _timeOnIce = 0
         _events = [StatEvent]()
     }
-    
-    
 }
